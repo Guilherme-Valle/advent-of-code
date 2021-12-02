@@ -18,20 +18,32 @@ const handleInstruction = (instruction) => {
     }
 }
 
-const getHorizontalPositionAndDepth = (instructions) => {
+const getSubmarinePosition = (instructions, hasAim) => {
     let horizontalPosition = 0;
     let depth = 0;
+    let aim = 0;
     instructions.forEach((instruction) => {
         instruction = handleInstruction(instruction);
         switch (instruction.operation){
             case 'up':
-                depth -= instruction.value;
+                if (hasAim){
+                    aim -= instruction.value;
+                } else {
+                    depth -= instruction.value;
+                }
                 break;
             case 'down':
-                depth += instruction.value;
+                if (hasAim){
+                    aim += instruction.value;
+                } else {
+                    depth += instruction.value;
+                }
                 break;
             case 'forward':
                 horizontalPosition += instruction.value;
+                if (hasAim){
+                    depth += (aim * instruction.value);
+                }
                 break;
         }
     });
@@ -41,5 +53,5 @@ const getHorizontalPositionAndDepth = (instructions) => {
 
 module.exports = {
     getInputAsArray,
-    getHorizontalPositionAndDepth
+    getSubmarinePosition
 }
