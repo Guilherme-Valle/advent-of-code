@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-function getInputAsArray(){
+const getInputAsArray = () => {
     try {
         const file = fs.readFileSync('input-1.txt', 'utf8');
         return file.split('\n').map(item => parseInt(item));
@@ -9,7 +9,7 @@ function getInputAsArray(){
     }
 }
 
-function countLargerMeasurements(measurements){
+const countLargerMeasurements = (measurements) => {
     let counter = 0;
     let previousMeasurement = null;
     measurements.forEach((measurement, index) => {
@@ -26,7 +26,7 @@ function countLargerMeasurements(measurements){
 }
 
 
-function createArrayOfSums(measurements){
+const createArrayOfSums = (measurements) => {
     let sums = [];
     const length = measurements.length;
     measurements.forEach((measurement, index) => {

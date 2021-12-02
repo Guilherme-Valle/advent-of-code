@@ -1,4 +1,4 @@
-var tools = require('./tools');
+const tools = require('./tools');
 
 const measurements = tools.getInputAsArray();
 
