@@ -4,6 +4,6 @@ const binarysMatrix = tools.getInputAsMatrix();
 
 const transposedMatrix = tools.transposeMatrix(binarysMatrix);
 
-const binaryOutput = tools.getBinaryOutput(transposedMatrix);
+const rates = tools.getGammaAndEpsilonRates(transposedMatrix);
 
-console.log(tools.binaryToDecimal(binaryOutput.gammaRate) * tools.binaryToDecimal(binaryOutput.epsilonRate))
+console.log(tools.binaryToDecimal(rates.gamma) * tools.binaryToDecimal(rates.epsilon))

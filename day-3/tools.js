@@ -11,26 +11,31 @@ const getInputAsMatrix = () => {
 // @https://stackoverflow.com/questions/17428587/transposing-a-2d-array-in-javascript - Yangshun Tay response
 const transposeMatrix = (matrix) => matrix[0].map((col, c) => matrix.map((row, r) => matrix[r][c]));
 
-const getBinaryOutput = (matrix) => {
-    let gammaRate = '';
-    let epsilonRate = '';
-    matrix.forEach((line) => {
-        let zeros = 0;
-        let ones = 0;
-        line.forEach((binary) => {
-            if (binary) ones++; else zeros++;
-        });
+const getMoreCommonBinary = (binarys) => {
+    let zeros = 0;
+    let ones = 0;
+    binarys.forEach((binary) => {
+        if (binary) ones++; else zeros++;
+    });
 
-        if (ones > zeros){
-            gammaRate += '1';
-            epsilonRate += '0';
+    return ones > zeros ? 1 : 0;
+}
+
+const getGammaAndEpsilonRates = (matrix) => {
+    let gamma = '';
+    let epsilon = '';
+    matrix.forEach((line) => {
+        const moreCommonBinary = getMoreCommonBinary(line);
+        if (moreCommonBinary){
+            gamma += '1';
+            epsilon += '0';
         } else {
-            gammaRate += '0';
-            epsilonRate += '1';
+            gamma += '0';
+            epsilon += '1';
         }
     });
 
-    return {gammaRate, epsilonRate};
+    return {gamma, epsilon};
 };
 
 const binaryToDecimal = (binary) => parseInt(binary, 2);
@@ -38,6 +43,6 @@ const binaryToDecimal = (binary) => parseInt(binary, 2);
 module.exports = {
     getInputAsMatrix,
     transposeMatrix,
-    getBinaryOutput,
+    getGammaAndEpsilonRates,
     binaryToDecimal
 }
